@@ -12,11 +12,9 @@ email.value = formData.email;
 textarea.value = formData.message;
 
 form.addEventListener("input", (evt) => {
-  const data = {
-    email: email.value.trim(),
-    message: textarea.value.trim(),
-  };
-  localStorage.setItem(localStorageKey, JSON.stringify(data));
+  formData.email = email.value.trim();
+  formData.message = textarea.value.trim();
+  localStorage.setItem(localStorageKey, JSON.stringify(formData));
 });
 
 form.addEventListener("submit", (evt) => {
@@ -25,8 +23,9 @@ form.addEventListener("submit", (evt) => {
     alert("Please fill in all fields");
     return;
   }
-  console.log(evt.target.elements.email.value);
-	console.log(evt.target.elements.message.value);
+  console.log(formData);
   localStorage.removeItem(localStorageKey);
+  formData.email = "";
+  formData.message = "";
   form.reset();
 });
